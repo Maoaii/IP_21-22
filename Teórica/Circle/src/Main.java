@@ -102,7 +102,4 @@ public class Main
 		String optn = in.next().toUpperCase();
 		executeOption(optn, circle, in);
 	}
-
-	
-	
 }
