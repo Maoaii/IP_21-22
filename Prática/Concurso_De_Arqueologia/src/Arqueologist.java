@@ -1,18 +1,31 @@
 /**
  * @author Lucas Girotto
- * 
+ * Arqueologist Class
+ * Holds all the info regarding a single Arqueologist,
+ * like its' name, position in a given moment, his merit and if his license is valid.
  */
 public class Arqueologist {
 	
-	//Instance variables
+	//Constants
+	private static final int STARTING_POSITION = -1;	//"-1" because plots begin at "0"
+	private static final int STARTING_MERIT = 0;
+
+	//Arqueologist Instance variables
 	private String name;
 	private int position;
 	private int merit;
 	private boolean license;
 	
-	//Constructor
+	/**
+	 * Arqueologist Constructor
+	 * @param name
+	 * @pre name != null
+	 */
 	public Arqueologist(String name) {
-		
+		this.name = name;
+		position = STARTING_POSITION;
+		merit = STARTING_MERIT;
+		license = true;
 	}
 	
 	/**
@@ -30,25 +43,51 @@ public class Arqueologist {
 	}
 	
 	/**
-	 * @return arqueologist's license
+	 * @return true if arqueologist has a license, false if he doesn't
 	 */
 	public boolean getLicense() {
 		return license;
 	}
 	
 	/**
-	 * Removes arqueologists license
+	 * Removes arqueologists license and sets its' merit to 0
 	 */
 	public void removeLicense() {
-		
+		license = false;
+		merit = 0;
 	}
 	
 	/**
-	 * Adds merit to the arqueologist that discovered merit
+	 * Adds merit to the arqueologist that discovered the treasure
 	 * @param treasure
 	 * @pre treasure != null
 	 */
 	public void addMerit(int treasure) {
-		
+		merit += treasure;
+	}
+	
+	/**
+	 * Removes merit from arqueologist and increments merit loss multiplier
+	 */
+	public void removeMerit(int meritLoss) {
+		merit -= meritLoss;
+	}
+	
+	/**
+	 * Updates arqueologists' position by "leap"
+	 * @param leap
+	 * @pre leap != null
+	 * @return new position
+	 */
+	public int updatePosition(int leap) {
+		position += leap; 
+		return position;
+	}
+	
+	/**
+	 * @return arqueologist's current position
+	 */
+	public int getPosition() {
+		return position;
 	}
 }
