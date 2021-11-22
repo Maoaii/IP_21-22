@@ -6,20 +6,20 @@
 public class Contest_Manager {
 
 	// Instance variables
-	// Archeologists
+		// Archeologists
 	private Archeologist arch1;
 	private Archeologist arch2;
 
-	// Plots
+		// Plots
 	private int size;
 	private Plot[] plots;
 
 	/**
 	 * Contest constructor
 	 * 
-	 * @param name1
-	 * @param name2
-	 * @param amountOfPlots
+	 * @param name1          name for archeologist 1
+	 * @param name2          name for archeologist 2
+	 * @param amountOfPlots, amount of plots in contest
 	 * @pre name1 != null && name2 != null && amountOfPlots != null
 	 */
 	public Contest_Manager(String name1, String name2, int amountOfPlots) {
@@ -34,10 +34,10 @@ public class Contest_Manager {
 	}
 
 	/**
-	 * Populates "plot" with "treasure"
+	 * Assigns treasure to plot
 	 * 
-	 * @param treasure
-	 * @param plot
+	 * @param treasure to assign to a certain plot
+	 * @param plot     to receive said treasure
 	 * @pre treasure != null && plot != null
 	 */
 	public void populatePlots(int treasure, int plot) {
@@ -53,8 +53,10 @@ public class Contest_Manager {
 
 		String terrain = "";
 
-		// Loop through all the plots and check if they have treasure.
-		// If they do, add "*" to string, otherwise, "-".
+		/**
+		 * Loop through all the plots and check if they have treasure. If they do, add "*" to
+		 * string, otherwise, "-".
+		 */
 		for (int i = 0; i < size; i++) {
 			if (plots[i].hasTreasure())
 				terrain += "*";
@@ -84,7 +86,7 @@ public class Contest_Manager {
 	/**
 	 * Returns the merit of "name" Archeologist
 	 * 
-	 * @param name
+	 * @param name to compare with archeologist's names
 	 * @pre name != null
 	 * @return merit associated with Archeologist "name"
 	 */
@@ -98,8 +100,8 @@ public class Contest_Manager {
 	/**
 	 * Computes an excavation, depending on the Archeologist
 	 * 
-	 * @param leap
-	 * @param name
+	 * @param leap distance that archeologist will travel
+	 * @param name to compare with archeologist's names
 	 * @pre leap != null && name != null
 	 */
 	public void computeExcavation(int leap, String name) {
@@ -110,11 +112,11 @@ public class Contest_Manager {
 	}
 
 	/**
-	 * Handles the updating of a plot and Archeologist's info when a plot is excavated, i.e., arch
-	 * merit, plot treasure
+	 * Handles the updating of a plot and Archeologist's info when a plot is excavated, 
+	 * i.e., arch merit, plot treasure
 	 * 
-	 * @param leap
-	 * @param arch
+	 * @param leap distance that archeologist will travel
+	 * @param arch archeologist that'll make the jump
 	 * @pre leap != null && arch != null
 	 */
 	public void excavatePlot(int leap, Archeologist arch) {
@@ -122,16 +124,18 @@ public class Contest_Manager {
 		// Update Archeologist position
 		arch.updatePosition(leap);
 
+		// Get the position of the plot the Archeologist landed on
+		Plot landedPlot = plots[arch.getPosition()];
+
 		// Add treasure to Archeologist merit
-		Plot plot = plots[arch.getPosition()];
-		arch.addMerit(plot.getTreasure());
+		arch.addMerit(landedPlot.getTreasure());
 
 		// Remove merit from Archeologist if that plot has already been dug up
-		if (plot.isDugUp())
-			arch.removeMerit(plot.meritLoss());
+		if (landedPlot.isDugUp())
+			arch.removeMerit(landedPlot.meritLoss());
 
 		// Update plot's treasure and make it dug up
-		plot.excavated();
+		landedPlot.excavated();
 	}
 
 	/**
@@ -142,7 +146,8 @@ public class Contest_Manager {
 	}
 
 	/**
-	 * @return false if both Archeologists have lost their license, true if atleast one still has it
+	 * @return false if both Archeologists have lost their license, 
+	 * true if atleast one still has it
 	 */
 	public boolean bothHaveLicense() {
 		return arch1.getLicense() || arch2.getLicense();
@@ -151,7 +156,7 @@ public class Contest_Manager {
 	/**
 	 * Checks to see if "name" Archeologist is taking part in the contest
 	 * 
-	 * @param name
+	 * @param name to compare with archeologist's names
 	 * @pre name != null
 	 * @return true if "name" corresponds to an Archeologist, false if it doesn't
 	 */
@@ -162,7 +167,7 @@ public class Contest_Manager {
 	/**
 	 * Checks to see if "name" Archeologist still has his license
 	 * 
-	 * @param name
+	 * @param name to compare with archeologist's names
 	 * @pre name != null
 	 * @return true if the Archeologist still has a license, false if he doesn't
 	 */
@@ -176,9 +181,10 @@ public class Contest_Manager {
 	/**
 	 * Checks to see if an Archeologists leap is out of bounds
 	 * 
-	 * @param name
+	 * @param name to compare with archeologist's names
+	 * @param leap distance that archeologist will travel
 	 * @pre leap != null && name != null
-	 * @return true if Archeologist's leap lands inside the contest terrain, false if it doesn't
+	 * @return true if Archeologist's leap lands inside the contest terrain, false if he doesn't
 	 */
 	public boolean isOutOfBounds(int leap, String name) {
 		if (arch1.getName().equals(name))
@@ -190,7 +196,7 @@ public class Contest_Manager {
 	/**
 	 * Removes an Archeologist's license
 	 * 
-	 * @param name
+	 * @param name to compare with archeologist's names
 	 * @pre name != null
 	 */
 	public void removeLicense(String name) {

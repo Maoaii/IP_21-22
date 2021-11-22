@@ -50,9 +50,9 @@ public class Main {
 	/**
 	 * Intepret user's commands
 	 * 
-	 * @param contest
-	 * @param command
-	 * @param in
+	 * @param contest system that manages the global project
+	 * @param command user command to be executed
+	 * @param in      built-in Scanner for input reading
 	 * @pre contest != null && command != null && in != null
 	 */
 	private static void interpretCommand(Scanner in, Contest_Manager contest, String command) {
@@ -86,11 +86,11 @@ public class Main {
 	}
 
 	/**
-	 * Prints out the amount of richness of all the plots, so, the sum of all treasures
-	 * and goes to the next console line
+	 * Prints out the amount of richness of all the plots, so, 
+	 * the sum of all treasures and goes to the next console line
 	 * 
-	 * @param contest
-	 * @param in
+	 * @param contest system that manages the global project
+	 * @param in      built-in Scanner for input reading
 	 * @pre contest != null && in != null
 	 */
 	private static void handleRichnessCmd(Contest_Manager contest, Scanner in) {
@@ -99,11 +99,11 @@ public class Main {
 	}
 
 	/**
-	 * Prints out the terrain of the contest "*" means there's treasure on the plot and "-" means it
-	 * doesn't. Also goes to console's next line
+	 * Prints out the terrain of the contest "*" means there's treasure on the plot 
+	 * and "-" means it doesn't. Also goes to console's next line.
 	 * 
-	 * @param contest
-	 * @param in
+	 * @param contest system that manages the global project
+	 * @param in      built-in Scanner for input reading
 	 * @pre contest != null && in != null
 	 */
 	private static void handleTerrainCmd(Contest_Manager contest, Scanner in) {
@@ -112,12 +112,11 @@ public class Main {
 	}
 
 	/**
-	 * Prints out the name of an archeologist and his current merit. 
-	 * Prints different error messages: if name doesn't match any archeologist; 
-	 * if archeologist doesn't have a license
+	 * Prints out the name of an archeologist and his current merit. Prints different error
+	 * messages: if name doesn't match any archeologist; if archeologist doesn't have a license
 	 * 
-	 * @param contest
-	 * @param in
+	 * @param contest system that manages the global project
+	 * @param in      built-in Scanner for input reading
 	 * @pre contest != null && in != null
 	 */
 	private static void handleMeritCmd(Contest_Manager contest, Scanner in) {
@@ -137,8 +136,8 @@ public class Main {
 	 * different error messages if: leap is 0, invalid; if name doesn't match an archeologist; if
 	 * archeologist is disqualified; if archeologist lept outside of the contest terrain
 	 * 
-	 * @param contest
-	 * @param in
+	 * @param contest system that manages the global project
+	 * @param in      built-in Scanner for input reading
 	 * @pre contest != null && in != null
 	 */
 	private static void handleExcavationCmd(Contest_Manager contest, Scanner in) {
@@ -149,12 +148,12 @@ public class Main {
 		if (leap == 0)
 			System.out.println(INVALID_LEAP);
 		else if (!contest.checkArchExists(name))
-			System.out.println(ARQ_DOESNT_EXIST);		// If name doesn't match any archeologist
+			System.out.println(ARQ_DOESNT_EXIST);	 // If name doesn't match any archeologist
 		else if (!contest.checkArchLicense(name))
-			System.out.println(ARQ_DISQUALIFIED);		// If archeologist doesn't have a license
+			System.out.println(ARQ_DISQUALIFIED);	 // If archeologist doesn't have a license
 		else if (contest.isOutOfBounds(leap, name)) {
-			contest.removeLicense(name); 			    // Remove Archeologist's license
-			System.out.println(name + LOST_LICENSE); 	// If archeologist lept outside contest
+			contest.removeLicense(name); 			 // Remove Archeologist's license
+			System.out.println(name + LOST_LICENSE); // If archeologist lept outside contest
 		} else
 			contest.computeExcavation(leap, name);
 	}
@@ -163,7 +162,7 @@ public class Main {
 	 * When user wants to quit program, prints out different messages depending on the state of
 	 * the contest: if archeologists lost their license and if there is still treasure or not
 	 * 
-	 * @param contest
+	 * @param contest system that manages the global project
 	 * @pre contest != null
 	 */
 	private static void handleQuitCmd(Contest_Manager contest) {
@@ -178,9 +177,9 @@ public class Main {
 	/**
 	 * Loops through the plots and buries treasures in them, according to user input
 	 * 
-	 * @param in
-	 * @param contest
-	 * @pre in != null && contest != null && in.nextInt() > 0 && in.nextInt() < 50 000
+	 * @param in      built-in Scanner for input reading
+	 * @param contest system that manages the global project
+	 * @pre in != null && contest != null
 	 */
 	private static void buryTreasures(Scanner in, Contest_Manager contest) {
 		for (int plot = 0; plot < contest.getNumberOfPlots(); plot++) {
@@ -193,13 +192,13 @@ public class Main {
 	/**
 	 * Reads the amount of plots user wants to create
 	 * 
-	 * @param in
-	 * @pre in != null && tmp >= 1 && tmp <= 100
+	 * @param in built-in Scanner for input reading
+	 * @pre in != null
 	 * @return number of plots to create
 	 */
 	private static int getNumberPlots(Scanner in) {
-		int tmp = in.nextInt();
+		int numPlots = in.nextInt();
 		in.nextLine();
-		return tmp;
+		return numPlots;
 	}
 }

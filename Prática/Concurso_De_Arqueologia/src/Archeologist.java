@@ -18,8 +18,8 @@ public class Archeologist {
 	/**
 	 * Archeologist Constructor
 	 * 
-	 * @param name
-	 * @pre name != null && name.length() > 0 && name.length() < 40
+	 * @param name assigned to archeologist
+	 * @pre name != null
 	 */
 	public Archeologist(String name) {
 		this.name = name;
@@ -31,7 +31,7 @@ public class Archeologist {
 	/**
 	 * Updates Archeologists' position by "leap"
 	 * 
-	 * @param leap
+	 * @param leap how much the archeologist will walk in the terrain
 	 * @pre leap != null
 	 * @return new Archeologist position
 	 */
@@ -50,7 +50,7 @@ public class Archeologist {
 	/**
 	 * Adds merit to the Archeologist that discovered the treasure
 	 * 
-	 * @param treasure
+	 * @param treasure to be added to archeologist's merit
 	 * @pre treasure != null
 	 */
 	public void addMerit(int treasure) {
@@ -60,7 +60,7 @@ public class Archeologist {
 	/**
 	 * Removes merit from Archeologist and increments merit loss multiplier
 	 * 
-	 * @param meritLoss
+	 * @param meritLoss to be subtracted from archeologists merit
 	 * @pre meritLoss != null
 	 */
 	public void removeMerit(int meritLoss) {

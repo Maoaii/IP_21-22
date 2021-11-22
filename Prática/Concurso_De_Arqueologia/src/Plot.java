@@ -16,23 +16,13 @@ public class Plot {
 	/**
 	 * Plot Constructor
 	 * 
-	 * @param treasure
+	 * @param treasure to assign to this plot
 	 * @pre treasure != null
 	 */
 	public Plot(int treasure) {
 		this.treasure = treasure;
 		dugUp = false;
 		meritLossMultiplier = 1;
-	}
-
-	/**
-	 * Assigns new treasure value to this plot
-	 * 
-	 * @param amount
-	 * @pre amount != null
-	 */
-	public void assignTreasure(int amount) {
-		treasure = amount;
 	}
 
 	/**
@@ -61,7 +51,7 @@ public class Plot {
 	}
 
 	/**
-	 * @return true if this plot has been dug up
+	 * @return true if this plot has been dug up, false if it hasn't
 	 */
 	public boolean isDugUp() {
 		return dugUp;
